@@ -3,25 +3,29 @@ package main
 import "fmt"
 
 func main(){
-	arr := []int{7,1,4,2,5,3,6,8}
-	hasDupe := checkForDupe(arr)
-	fmt.Println(hasDupe)
+	arr := []int{2,5,4,1,3,5,7}
+	hasDupe, val:= checkForDupe(arr)
+	fmt.Println(hasDupe, val)
 }
 
-func checkForDupe(arr []int) bool {
+func checkForDupe(arr []int) (bool, int) {
 	for index, value := range arr {
 		if value != index + 1 {
 			if arr[index] == arr[ arr[index] - 1 ]{
-				return true
+				return true, value
 			}
-		} else {
-			//fmt.Println("Skipping", index)
 		}
-		fmt.Println("Swapping", arr[index], "with", arr[ arr[index] - 1 ])
 		arr[index], arr[ arr[index] - 1 ] = arr[ arr[index] - 1 ], arr[index]
 		fmt.Println(index, arr)
 	}
 
+	for index, value := range arr {
+		fmt.Println(arr[index], value)
+		if(index + 1 != value){
+			return true, value
+		}
+	}
+
 	fmt.Println("final", arr)
-	return false
+	return false, 0
 }
